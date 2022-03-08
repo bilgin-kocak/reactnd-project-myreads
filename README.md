@@ -4,7 +4,7 @@
 
 ## Project Purpose:
 
-This project was built for the Udacity React Nanodegree Program. The purpose of the project is to demonstrate understanding of the basic structure and operation of a React-based app.
+This project was built for the Udacity React Nanodegree Program. The purpose of the project is to demonstrate understanding of the basic structure and operation of a React-based app. To see the deployed version of the app, [click here](https://inspiring-thompson-e19fa9.netlify.app/)
 
 ## Installation
 
