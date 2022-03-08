@@ -11,7 +11,7 @@ This project was built for the Udacity React Nanodegree Program. The purpose of 
 The project uses Node.js and the Create-React-App starter. If you do not have Node >= 6.x installed, you can download it here: [Node.js](https://nodejs.org/en/)
 
 ```
-git clone https://github.com/sarah-maris/reactnd-project-myreads.git
+git clone https://github.com/bilgin-kocak/reactnd-project-myreads.git
 npm install
 ```
 
