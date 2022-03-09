@@ -82,18 +82,23 @@ class BooksApp extends React.Component {
 
   getBook = (event, id) => {
     const book = this.state.booksApi.filter((b) => b.id === id)[0];
-    this.setState({
-      books: [
-        ...this.state.books,
-        {
-          id: book.id,
-          title: book.title,
-          authors: book.authors,
-          backgroundUrl: book.backgroundUrl,
-          type: event.target.value,
-        },
-      ],
-    });
+    const ids = this.state.books.map((b) => b.id);
+    if (ids.includes(book.id)) {
+      this.changeType({ target: { value: event.target.value } }, book.id);
+    } else {
+      this.setState({
+        books: [
+          ...this.state.books,
+          {
+            id: book.id,
+            title: book.title,
+            authors: book.authors,
+            backgroundUrl: book.backgroundUrl,
+            type: event.target.value,
+          },
+        ],
+      });
+    }
     BooksAPI.update(book, event.target.value);
   };
 
