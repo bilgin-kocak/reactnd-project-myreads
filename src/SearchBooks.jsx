@@ -63,7 +63,7 @@ class SearchBooks extends Component {
                   title={book.title}
                   authors={book.authors}
                   backgroundUrl={book.backgroundUrl}
-                  type={"none"}
+                  type={book.type}
                   handleChange={this.props.handleChange}
                 />
               </li>

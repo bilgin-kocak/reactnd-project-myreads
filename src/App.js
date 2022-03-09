@@ -20,7 +20,6 @@ class BooksApp extends React.Component {
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      console.log(books);
       books = this.convertToOurFormat(books);
       books = books.filter((b) => b.type !== "none");
       this.setState({
@@ -31,6 +30,7 @@ class BooksApp extends React.Component {
 
   convertToOurFormat = (books) => {
     if (Array.isArray(books)) {
+      const ids = this.state.books.map((b) => b.id);
       books = books.map((b) => ({
         id: b.id,
         title: b.title,
@@ -39,7 +39,12 @@ class BooksApp extends React.Component {
           "imageLinks" in b
             ? b.imageLinks.thumbnail
             : "https://www.claws.in/static/book-cover-placeholder-e1563706855534.jpg",
-        type: "shelf" in b ? b.shelf : "none",
+        type:
+          "shelf" in b
+            ? b.shelf
+            : ids.includes(b.id)
+            ? this.state.books[ids.indexOf(b.id)].type
+            : "none",
       }));
       return books;
     } else {
@@ -56,7 +61,7 @@ class BooksApp extends React.Component {
   };
 
   changeType = (event, id) => {
-    const book = this.state.booksApi.filter((b) => b.id === id)[0];
+    const book = this.state.books.filter((b) => b.id === id)[0];
     const otherBooks = this.state.books.filter((b) => b.id !== id);
     // let otherBooks = this.state.books.slice();
     // otherBooks.splice(index, 1);
@@ -72,6 +77,7 @@ class BooksApp extends React.Component {
         },
       ],
     });
+    BooksAPI.update(book, event.target.value);
   };
 
   getBook = (event, id) => {
@@ -102,6 +108,7 @@ class BooksApp extends React.Component {
               <SearchBooks
                 query={this.state.query}
                 booksApi={this.state.booksApi}
+                books={this.state.books}
                 handleChange={this.getBook}
                 searchBooks={(query) => {
                   this.searchBooks(query);
